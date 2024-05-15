@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<link rel="stylesheet"
+type="text/css"href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Ajout des Pieces</title>
+</head>
+<body>
+<div th:replace="template"></div>
+<div class="container mt-5">
+	<div class="card">
+	<div class="card-header" th:if="${mode=='new'}"> Ajout des Pieces </div>
+	<div class="card-header" th:if="${mode=='edit'}">Modification des Pieces </div>
+	<div class="card-body">
+	<form th:action="@{savePiece}" method="post">
+		<input hidden name="page" class="form-control" th:value="${page}" />
+		<input hidden="size" class="form-control" th:value="${size}" />
+	<div class="form-group">
+					<label class="control-label" hidden>ID Piece :</label> 
+				       <input type="hidden" name="idPiece" class="form-control" th:value="${piece.idPiece}"  />
+				</div>
+		
+		<div class="form-group">
+	<label class="control-label">Nom Piece :</label>
+	<input type="text" name="nomPiece" class="form-control"  	th:value="${piece.nomPiece}"/>
+	<span th:errors= ${piece.nomPiece} class="text-danger"> </span>
+	</div>
+	<div class="form-group">
+	<label class="control-label">Prix Piece :</label>
+	<input type="text" name="prixPiece" class="form-control"  	th:value="${piece.prixPiece}" />
+	<span th:errors=${piece.prixPiece} class="text-danger"> </span>
+	</div>
+	<div class="form-group">
+	<label class="control-label">date création :</label>
+	<input type="date" name="dateCreation" class="form-control"  	th:value="${piece.dateCreation}"/>
+	<span th:errors=${piece.dateCreation} class="text-danger"> </span>
+	</div>
+<div class="form-group">
+<label class="control-label">Model :</label>
+<input type="text" name="model" class="form-control" th:value="${piece.model}" />
+</div>
+
+<div class="form-group">
+	<label class="control-label">Nature :</label>
+	<select name="nature" class="form-control" th:value="${piece.nature.idNat}"
+		th:if="${!#strings.isEmpty(piece.nature)}">
+		<option th:each="c:${natures}" th:if="${mode=='edit'}" th:value="${c.idNat}" th:text="${c.nomNat}"
+			th:selected="${ c.idNat==piece.nature.idNat}">
+		</option>
+	</select>
+	<select name="nature" class="form-control" th:if="${#strings.isEmpty(piece.nature)}">
+		<option th:each="c:${natures}" th:value="${c.idNat}" th:text="${c.nomNat}">
+		</option>
+	</select>
+</div>
+
+<div>
+<button type="submit" class="btn btn-primary">Valider</button>
+<span th:errors= ${piece.nomPiece} class="text-danger">
+</div>
+</form>
+</div>
+</di>
+</div>
+</body>
+</html>
