@@ -20,15 +20,8 @@ public class Role {
 	private Long role_id;
 	private String role;
 
-	public Role(Object object, String string) {
-		// TODO Auto-generated constructor stub
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
+
+	
 	
 	
 	
